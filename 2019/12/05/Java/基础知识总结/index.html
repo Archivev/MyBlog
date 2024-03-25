@@ -1,0 +1,410 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><title>Java 面试（一）– 基础知识总结 | Archiver`s Blog</title><meta name="description" content="Java 面试（一）– 基础知识总结"><meta name="keywords" content="java,面试"><meta name="author" content="Archiver"><meta name="copyright" content="Archiver"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="preconnect" href="//cdn.jsdelivr.net"><meta name="baidu-site-verification" content="72LdAzbqMW"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Java 面试（一）– 基础知识总结"><meta name="twitter:description" content="Java 面试（一）– 基础知识总结"><meta name="twitter:image" content="https://cdn.kaiming66.com/java.jpg"><meta property="og:type" content="article"><meta property="og:title" content="Java 面试（一）– 基础知识总结"><meta property="og:url" content="https://www.kaiming66.com/2019/12/05/Java/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/"><meta property="og:site_name" content="Archiver`s Blog"><meta property="og:description" content="Java 面试（一）– 基础知识总结"><meta property="og:image" content="https://cdn.kaiming66.com/java.jpg"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>const autoChangeMode = 'true'
+var t = Cookies.get("theme");
+if (autoChangeMode == '1'){
+const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+const isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+const isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+if (t === undefined){
+  if (isLightMode) activateLightMode()
+  else if (isDarkMode) activateDarkMode()
+  else if (isNotSpecified || hasNoSupport){
+    console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+    now = new Date();
+    hour = now.getHours();
+    isNight = hour < 6 || hour >= 18
+    isNight ? activateDarkMode() : activateLightMode()
+}
+} else if (t == 'light') activateLightMode()
+else activateDarkMode()
+
+
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
+
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.15/dist/snackbar.min.css"><link rel="canonical" href="https://www.kaiming66.com/2019/12/05/Java/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/"><link rel="prev" title="深入理解JVM--内存区域总结" href="https://www.kaiming66.com/2019/12/06/jvm/Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E6%80%BB%E7%BB%93/"><link rel="next" title="基于 Servlet + jsp + MySQL 实现博客管理系统" href="https://www.kaiming66.com/2019/12/02/project/Java-Web-%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E5%8D%9A%E5%AE%A2/"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"http://www.kaiming66.com/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  highlight_copy: 'true',
+  highlight_lang: 'true',
+  highlight_shrink: 'false',
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    title: 'Snackbar.bookmark.title',
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  copyright: {"languages":{"author":"作者: Archiver","link":"链接: https://www.kaiming66.com/2019/12/05/Java/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/","source":"来源: Archiver`s Blog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  copy_copyright_js: true,
+  ClickShowText: undefined,
+  medium_zoom: 'true',
+  Snackbar: {"bookmark":{"title":"Snackbar.bookmark.title","message_prev":"按","message_next":"键将本页加入书签"},"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#2d3035","position":"bottom-right"}
+  
+}</script><meta name="generator" content="Hexo 4.2.1"></head><body><canvas class="fireworks"></canvas><div id="header"> <div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">Archiver`s Blog</a></span><i class="fa fa-bars fa-fw toggle-menu pull_right close" aria-hidden="true"></i><span class="pull_right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-folder-open" aria-hidden="true"></i><span> 分类</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/categories/个人博客/"><i class="fa-fw fa fa-bars"></i><span> 博客</span></a></li><li><a class="site-page" href="/categories/折腾/"><i class="fa-fw fa fa-rocket"></i><span> 折腾</span></a></li><li><a class="site-page" href="/categories/项目/"><i class="fa-fw fa fa-flask"></i><span> 项目</span></a></li><li><a class="site-page" href="/categories/Java/"><i class="fa-fw fa fa-coffee"></i><span> Java</span></a></li><li><a class="site-page" href="/categories/Jvm/"><i class="fa-fw fa fa-microchip"></i><span> Jvm</span></a></li><li><a class="site-page" href="/categories/demo/"><i class="fa-fw fa fa-cubes"></i><span> demo</span></a></li><li><a class="site-page" href="/categories/http/"><i class="fa-fw fa fa-internet-explorer"></i><span> http</span></a></li><li><a class="site-page" href="/categories/redis/"><i class="fa-fw fa fa-file-code-o"></i><span> Redis</span></a></li><li><a class="site-page" href="/categories/分布式/"><i class="fa-fw fa fa-cog fa-spin"></i><span> 分布式</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 清单</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/photo/"><i class="fa-fw fa fa-picture-o"></i><span> 相册</span></a></li><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li><li><a class="site-page" href="/books/"><i class="fa-fw fa fa-book"></i><span> 书籍</span></a></li><li><a class="site-page" href="/comic/"><i class="fa-fw fa fa-youtube-play"></i><span> 动漫</span></a></li><li><a class="site-page" href="/games/"><i class="fa-fw fa fa-gamepad"></i><span> 游戏</span></a></li></ul></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-address-book" aria-hidden="true"></i><span> 其他</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></li><li><a class="site-page" href="/message/"><i class="fa-fw fa fa-coffee"></i><span> 留言</span></a></li><li><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></li><li><a class="site-page" href="/aning/"><i class="fa-fw fa fa-heart"></i><span> 阿宁</span></a></li></ul></div></div></span><span class="pull_right" id="search_button"><a class="site-page social-icon search"><i class="fa fa-search fa-fw"></i><span> 搜索</span></a></span></div></div><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="lazyload avatar_img" src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'"></div><div class="mobile_post_data"><div class="mobile_data_item is_center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">32</div></a></div></div><div class="mobile_data_item is_center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">21</div></a></div></div><div class="mobile_data_item is_center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">10</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-folder-open" aria-hidden="true"></i><span> 分类</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/categories/个人博客/"><i class="fa-fw fa fa-bars"></i><span> 博客</span></a></li><li><a class="site-page" href="/categories/折腾/"><i class="fa-fw fa fa-rocket"></i><span> 折腾</span></a></li><li><a class="site-page" href="/categories/项目/"><i class="fa-fw fa fa-flask"></i><span> 项目</span></a></li><li><a class="site-page" href="/categories/Java/"><i class="fa-fw fa fa-coffee"></i><span> Java</span></a></li><li><a class="site-page" href="/categories/Jvm/"><i class="fa-fw fa fa-microchip"></i><span> Jvm</span></a></li><li><a class="site-page" href="/categories/demo/"><i class="fa-fw fa fa-cubes"></i><span> demo</span></a></li><li><a class="site-page" href="/categories/http/"><i class="fa-fw fa fa-internet-explorer"></i><span> http</span></a></li><li><a class="site-page" href="/categories/redis/"><i class="fa-fw fa fa-file-code-o"></i><span> Redis</span></a></li><li><a class="site-page" href="/categories/分布式/"><i class="fa-fw fa fa-cog fa-spin"></i><span> 分布式</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 清单</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/photo/"><i class="fa-fw fa fa-picture-o"></i><span> 相册</span></a></li><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li><li><a class="site-page" href="/books/"><i class="fa-fw fa fa-book"></i><span> 书籍</span></a></li><li><a class="site-page" href="/comic/"><i class="fa-fw fa fa-youtube-play"></i><span> 动漫</span></a></li><li><a class="site-page" href="/games/"><i class="fa-fw fa fa-gamepad"></i><span> 游戏</span></a></li></ul></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-address-book" aria-hidden="true"></i><span> 其他</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></li><li><a class="site-page" href="/message/"><i class="fa-fw fa fa-coffee"></i><span> 留言</span></a></li><li><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></li><li><a class="site-page" href="/aning/"><i class="fa-fw fa fa-heart"></i><span> 阿宁</span></a></li></ul></div></div></div><div id="mobile-sidebar-toc"><div class="toc_mobile_headline">目录</div><ol class="toc_mobile_items"><li class="toc_mobile_items-item toc_mobile_items-level-1"><a class="toc_mobile_items-link" href="#Java-面试（一）–-基础知识总结"><span class="toc_mobile_items-number">1.</span> <span class="toc_mobile_items-text">Java 面试（一）– 基础知识总结</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#面向对象和面向过程的区别"><span class="toc_mobile_items-number">1.1.</span> <span class="toc_mobile_items-text">面向对象和面向过程的区别</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#Java-语言有哪些特点？"><span class="toc_mobile_items-number">1.2.</span> <span class="toc_mobile_items-text">Java 语言有哪些特点？</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#jdk、jre、jvm-的关系"><span class="toc_mobile_items-number">1.3.</span> <span class="toc_mobile_items-text">jdk、jre、jvm 的关系</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#Java-与-c-的区别于联系"><span class="toc_mobile_items-number">1.4.</span> <span class="toc_mobile_items-text">Java 与 c++ 的区别于联系</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#字符型常量和字符串常量的区别"><span class="toc_mobile_items-number">1.5.</span> <span class="toc_mobile_items-text">字符型常量和字符串常量的区别</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#构造器-Constructor-不能被-override"><span class="toc_mobile_items-number">1.6.</span> <span class="toc_mobile_items-text">构造器 Constructor 不能被 override</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#重载和重写"><span class="toc_mobile_items-number">1.7.</span> <span class="toc_mobile_items-text">重载和重写</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#Java-面向对象三大特性：封装、继承、多态"><span class="toc_mobile_items-number">1.8.</span> <span class="toc_mobile_items-text">Java 面向对象三大特性：封装、继承、多态</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#继承"><span class="toc_mobile_items-number">1.8.1.</span> <span class="toc_mobile_items-text">继承</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#封装"><span class="toc_mobile_items-number">1.8.2.</span> <span class="toc_mobile_items-text">封装</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#多态"><span class="toc_mobile_items-number">1.8.3.</span> <span class="toc_mobile_items-text">多态</span></a></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#String、StringBuffer、StringBuilder-的区别？为什么String-是不可变的？"><span class="toc_mobile_items-number">1.9.</span> <span class="toc_mobile_items-text">String、StringBuffer、StringBuilder 的区别？为什么String 是不可变的？</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#自动装箱、拆箱"><span class="toc_mobile_items-number">1.10.</span> <span class="toc_mobile_items-text">自动装箱、拆箱</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#在一个静态方法内调用一个非静态成员为什么是非法的？"><span class="toc_mobile_items-number">1.11.</span> <span class="toc_mobile_items-text">在一个静态方法内调用一个非静态成员为什么是非法的？</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#在-java-中定义一个不做事且没有参数的构造方法的作用："><span class="toc_mobile_items-number">1.12.</span> <span class="toc_mobile_items-text">在 java 中定义一个不做事且没有参数的构造方法的作用：</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#import-java和javax有什么区别？"><span class="toc_mobile_items-number">1.13.</span> <span class="toc_mobile_items-text">import java和javax有什么区别？</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#接口和抽象类的区别？"><span class="toc_mobile_items-number">1.14.</span> <span class="toc_mobile_items-text">接口和抽象类的区别？</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#成员变量与局部变量的区别？"><span class="toc_mobile_items-number">1.15.</span> <span class="toc_mobile_items-text">成员变量与局部变量的区别？</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#语法上看"><span class="toc_mobile_items-number">1.15.1.</span> <span class="toc_mobile_items-text">语法上看</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#在内存的存储方式"><span class="toc_mobile_items-number">1.15.2.</span> <span class="toc_mobile_items-text">在内存的存储方式</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#内存生命周期"><span class="toc_mobile_items-number">1.15.3.</span> <span class="toc_mobile_items-text">内存生命周期</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#初值"><span class="toc_mobile_items-number">1.15.4.</span> <span class="toc_mobile_items-text">初值</span></a></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#对象实体和对象引用的不同？"><span class="toc_mobile_items-number">1.16.</span> <span class="toc_mobile_items-text">对象实体和对象引用的不同？</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#静态方法-和-实例方法-有何不同？"><span class="toc_mobile_items-number">1.17.</span> <span class="toc_mobile_items-text">静态方法 和 实例方法 有何不同？</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#对象的相等-与-指向他们的引用相等-有何区别？"><span class="toc_mobile_items-number">1.18.</span> <span class="toc_mobile_items-text">对象的相等 与 指向他们的引用相等 有何区别？</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#与-equals-！！"><span class="toc_mobile_items-number">1.19.</span> <span class="toc_mobile_items-text">&#x3D;&#x3D; 与 equals ！！</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#"><span class="toc_mobile_items-number">1.19.1.</span> <span class="toc_mobile_items-text">&#x3D;&#x3D;</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#equals"><span class="toc_mobile_items-number">1.19.2.</span> <span class="toc_mobile_items-text">equals</span></a></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#hashCode-和-equals"><span class="toc_mobile_items-number">1.20.</span> <span class="toc_mobile_items-text">hashCode 和 equals</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#hashCode"><span class="toc_mobile_items-number">1.20.1.</span> <span class="toc_mobile_items-text">hashCode()</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#hashCode-和-equals-的规定"><span class="toc_mobile_items-number">1.20.2.</span> <span class="toc_mobile_items-text">hashCode 和 equals 的规定</span></a></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#Java只有值传递！！"><span class="toc_mobile_items-number">1.21.</span> <span class="toc_mobile_items-text">Java只有值传递！！</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#线程、程序、进程的基本概念，三者关系是什么？"><span class="toc_mobile_items-number">1.22.</span> <span class="toc_mobile_items-text">线程、程序、进程的基本概念，三者关系是什么？</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#线程"><span class="toc_mobile_items-number">1.22.1.</span> <span class="toc_mobile_items-text">线程</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#程序"><span class="toc_mobile_items-number">1.22.2.</span> <span class="toc_mobile_items-text">程序</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#进程"><span class="toc_mobile_items-number">1.22.3.</span> <span class="toc_mobile_items-text">进程</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#线程的基本状态"><span class="toc_mobile_items-number">1.22.4.</span> <span class="toc_mobile_items-text">线程的基本状态</span></a></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#final-关键字总结"><span class="toc_mobile_items-number">1.23.</span> <span class="toc_mobile_items-text">final 关键字总结</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#变量"><span class="toc_mobile_items-number">1.23.1.</span> <span class="toc_mobile_items-text">变量</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#方法"><span class="toc_mobile_items-number">1.23.2.</span> <span class="toc_mobile_items-text">方法</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#类"><span class="toc_mobile_items-number">1.23.3.</span> <span class="toc_mobile_items-text">类</span></a></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#Java的异常处理"><span class="toc_mobile_items-number">1.24.</span> <span class="toc_mobile_items-text">Java的异常处理</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#Throwable-常用方法"><span class="toc_mobile_items-number">1.24.1.</span> <span class="toc_mobile_items-text">Throwable 常用方法</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#final-会覆盖-try-的-return-语句"><span class="toc_mobile_items-number">1.24.2.</span> <span class="toc_mobile_items-text">final 会覆盖 try 的 return 语句</span></a></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#Java-如果有些字段不想序列化怎么办？"><span class="toc_mobile_items-number">1.25.</span> <span class="toc_mobile_items-text">Java 如果有些字段不想序列化怎么办？</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#获取键盘输入的两种方法："><span class="toc_mobile_items-number">1.26.</span> <span class="toc_mobile_items-text">获取键盘输入的两种方法：</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#Java-I-O-总结"><span class="toc_mobile_items-number">1.27.</span> <span class="toc_mobile_items-text">Java I&#x2F;O 总结</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#不同的读取方式的速度：批处理带缓冲-gt-批处理-gt-缓冲-gt-直接读取"><span class="toc_mobile_items-number">1.27.1.</span> <span class="toc_mobile_items-text">不同的读取方式的速度：批处理带缓冲&gt;批处理&gt;缓冲&gt;直接读取</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#既然有了字节流为什么还有字符流？（主要是应对编码问题）"><span class="toc_mobile_items-number">1.27.2.</span> <span class="toc_mobile_items-text">既然有了字节流为什么还有字符流？（主要是应对编码问题）</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#BIO、NIO、AIO的区别？"><span class="toc_mobile_items-number">1.27.3.</span> <span class="toc_mobile_items-text">BIO、NIO、AIO的区别？</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#BIO"><span class="toc_mobile_items-number">1.27.3.1.</span> <span class="toc_mobile_items-text">BIO</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#NIO"><span class="toc_mobile_items-number">1.27.3.2.</span> <span class="toc_mobile_items-text">NIO</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#AIO"><span class="toc_mobile_items-number">1.27.3.3.</span> <span class="toc_mobile_items-text">AIO</span></a></li></ol></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#深拷贝和浅拷贝："><span class="toc_mobile_items-number">1.28.</span> <span class="toc_mobile_items-text">深拷贝和浅拷贝：</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#深拷贝"><span class="toc_mobile_items-number">1.28.1.</span> <span class="toc_mobile_items-text">深拷贝</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#浅拷贝"><span class="toc_mobile_items-number">1.28.2.</span> <span class="toc_mobile_items-text">浅拷贝</span></a></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#-1"><span class="toc_mobile_items-number">1.29.</span> <span class="toc_mobile_items-text"></span></a></li></ol></li></ol></div></div><div id="body-wrap"><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true">     </i><div class="auto_open" id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java-面试（一）–-基础知识总结"><span class="toc-number">1.</span> <span class="toc-text">Java 面试（一）– 基础知识总结</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#面向对象和面向过程的区别"><span class="toc-number">1.1.</span> <span class="toc-text">面向对象和面向过程的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java-语言有哪些特点？"><span class="toc-number">1.2.</span> <span class="toc-text">Java 语言有哪些特点？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#jdk、jre、jvm-的关系"><span class="toc-number">1.3.</span> <span class="toc-text">jdk、jre、jvm 的关系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java-与-c-的区别于联系"><span class="toc-number">1.4.</span> <span class="toc-text">Java 与 c++ 的区别于联系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字符型常量和字符串常量的区别"><span class="toc-number">1.5.</span> <span class="toc-text">字符型常量和字符串常量的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#构造器-Constructor-不能被-override"><span class="toc-number">1.6.</span> <span class="toc-text">构造器 Constructor 不能被 override</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#重载和重写"><span class="toc-number">1.7.</span> <span class="toc-text">重载和重写</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java-面向对象三大特性：封装、继承、多态"><span class="toc-number">1.8.</span> <span class="toc-text">Java 面向对象三大特性：封装、继承、多态</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#继承"><span class="toc-number">1.8.1.</span> <span class="toc-text">继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#封装"><span class="toc-number">1.8.2.</span> <span class="toc-text">封装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多态"><span class="toc-number">1.8.3.</span> <span class="toc-text">多态</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#String、StringBuffer、StringBuilder-的区别？为什么String-是不可变的？"><span class="toc-number">1.9.</span> <span class="toc-text">String、StringBuffer、StringBuilder 的区别？为什么String 是不可变的？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自动装箱、拆箱"><span class="toc-number">1.10.</span> <span class="toc-text">自动装箱、拆箱</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在一个静态方法内调用一个非静态成员为什么是非法的？"><span class="toc-number">1.11.</span> <span class="toc-text">在一个静态方法内调用一个非静态成员为什么是非法的？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在-java-中定义一个不做事且没有参数的构造方法的作用："><span class="toc-number">1.12.</span> <span class="toc-text">在 java 中定义一个不做事且没有参数的构造方法的作用：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#import-java和javax有什么区别？"><span class="toc-number">1.13.</span> <span class="toc-text">import java和javax有什么区别？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#接口和抽象类的区别？"><span class="toc-number">1.14.</span> <span class="toc-text">接口和抽象类的区别？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#成员变量与局部变量的区别？"><span class="toc-number">1.15.</span> <span class="toc-text">成员变量与局部变量的区别？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#语法上看"><span class="toc-number">1.15.1.</span> <span class="toc-text">语法上看</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在内存的存储方式"><span class="toc-number">1.15.2.</span> <span class="toc-text">在内存的存储方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内存生命周期"><span class="toc-number">1.15.3.</span> <span class="toc-text">内存生命周期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#初值"><span class="toc-number">1.15.4.</span> <span class="toc-text">初值</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象实体和对象引用的不同？"><span class="toc-number">1.16.</span> <span class="toc-text">对象实体和对象引用的不同？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#静态方法-和-实例方法-有何不同？"><span class="toc-number">1.17.</span> <span class="toc-text">静态方法 和 实例方法 有何不同？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象的相等-与-指向他们的引用相等-有何区别？"><span class="toc-number">1.18.</span> <span class="toc-text">对象的相等 与 指向他们的引用相等 有何区别？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#与-equals-！！"><span class="toc-number">1.19.</span> <span class="toc-text">&#x3D;&#x3D; 与 equals ！！</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.19.1.</span> <span class="toc-text">&#x3D;&#x3D;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#equals"><span class="toc-number">1.19.2.</span> <span class="toc-text">equals</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hashCode-和-equals"><span class="toc-number">1.20.</span> <span class="toc-text">hashCode 和 equals</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#hashCode"><span class="toc-number">1.20.1.</span> <span class="toc-text">hashCode()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hashCode-和-equals-的规定"><span class="toc-number">1.20.2.</span> <span class="toc-text">hashCode 和 equals 的规定</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java只有值传递！！"><span class="toc-number">1.21.</span> <span class="toc-text">Java只有值传递！！</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线程、程序、进程的基本概念，三者关系是什么？"><span class="toc-number">1.22.</span> <span class="toc-text">线程、程序、进程的基本概念，三者关系是什么？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#线程"><span class="toc-number">1.22.1.</span> <span class="toc-text">线程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#程序"><span class="toc-number">1.22.2.</span> <span class="toc-text">程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#进程"><span class="toc-number">1.22.3.</span> <span class="toc-text">进程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#线程的基本状态"><span class="toc-number">1.22.4.</span> <span class="toc-text">线程的基本状态</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#final-关键字总结"><span class="toc-number">1.23.</span> <span class="toc-text">final 关键字总结</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#变量"><span class="toc-number">1.23.1.</span> <span class="toc-text">变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法"><span class="toc-number">1.23.2.</span> <span class="toc-text">方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#类"><span class="toc-number">1.23.3.</span> <span class="toc-text">类</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java的异常处理"><span class="toc-number">1.24.</span> <span class="toc-text">Java的异常处理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Throwable-常用方法"><span class="toc-number">1.24.1.</span> <span class="toc-text">Throwable 常用方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#final-会覆盖-try-的-return-语句"><span class="toc-number">1.24.2.</span> <span class="toc-text">final 会覆盖 try 的 return 语句</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java-如果有些字段不想序列化怎么办？"><span class="toc-number">1.25.</span> <span class="toc-text">Java 如果有些字段不想序列化怎么办？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#获取键盘输入的两种方法："><span class="toc-number">1.26.</span> <span class="toc-text">获取键盘输入的两种方法：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java-I-O-总结"><span class="toc-number">1.27.</span> <span class="toc-text">Java I&#x2F;O 总结</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#不同的读取方式的速度：批处理带缓冲-gt-批处理-gt-缓冲-gt-直接读取"><span class="toc-number">1.27.1.</span> <span class="toc-text">不同的读取方式的速度：批处理带缓冲&gt;批处理&gt;缓冲&gt;直接读取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#既然有了字节流为什么还有字符流？（主要是应对编码问题）"><span class="toc-number">1.27.2.</span> <span class="toc-text">既然有了字节流为什么还有字符流？（主要是应对编码问题）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BIO、NIO、AIO的区别？"><span class="toc-number">1.27.3.</span> <span class="toc-text">BIO、NIO、AIO的区别？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#BIO"><span class="toc-number">1.27.3.1.</span> <span class="toc-text">BIO</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#NIO"><span class="toc-number">1.27.3.2.</span> <span class="toc-text">NIO</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#AIO"><span class="toc-number">1.27.3.3.</span> <span class="toc-text">AIO</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#深拷贝和浅拷贝："><span class="toc-number">1.28.</span> <span class="toc-text">深拷贝和浅拷贝：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#深拷贝"><span class="toc-number">1.28.1.</span> <span class="toc-text">深拷贝</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#浅拷贝"><span class="toc-number">1.28.2.</span> <span class="toc-text">浅拷贝</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#-1"><span class="toc-number">1.29.</span> <span class="toc-text"></span></a></li></ol></li></ol></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://cdn.kaiming66.com/java.jpg)"><div id="post-info"><div id="post-title"><div class="posttitle">Java 面试（一）– 基础知识总结</div></div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 发表于 2019-12-05<span class="post-meta__separator">|</span><i class="fa fa-history" aria-hidden="true"></i> 更新于 2021-06-15</time><span class="post-meta__separator mobile_hidden">|</span><span class="mobile_hidden"><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Java/">Java</a></span><div class="post-meta-wordcount"><i class="fa fa-file-word-o post-meta__icon" aria-hidden="true"></i><span>字数总计: </span><span class="word-count">5.8k</span><span class="post-meta__separator">|</span><i class="fa fa-clock-o post-meta__icon" aria-hidden="true"></i><span>阅读时长: 18 分钟</span><span class="post-meta__separator">|</span><i class="fa fa-eye post-meta__icon" aria-hidden="true">       </i><span>阅读量: </span><span id="busuanzi_value_page_pv"></span></div></div></div></div><div class="layout layout_post" id="content-inner">   <article id="post"><div class="article-container" id="post-content"><h1 id="Java-面试（一）–-基础知识总结"><a href="#Java-面试（一）–-基础知识总结" class="headerlink" title="Java 面试（一）– 基础知识总结"></a>Java 面试（一）– 基础知识总结</h1><blockquote>
+<p>本文根据 Java Guide</p>
+</blockquote>
+<h2 id="面向对象和面向过程的区别"><a href="#面向对象和面向过程的区别" class="headerlink" title="面向对象和面向过程的区别"></a>面向对象和面向过程的区别</h2><ul>
+<li>面向对象的性能比面向过程的性能低<ul>
+<li>因为类调用得初始化、实例化，比较消耗资源</li>
+<li>Java是半编译语言，最终的执行代码并不是可以直接被CPU执行的二进制机械码，而是交由jvm处理。</li>
+</ul>
+</li>
+</ul>
+<h2 id="Java-语言有哪些特点？"><a href="#Java-语言有哪些特点？" class="headerlink" title="Java 语言有哪些特点？"></a>Java 语言有哪些特点？</h2><ul>
+<li>Java 三大特性（封装、继承、多态）</li>
+<li>jvm 实现跨平台特性</li>
+<li>支持多线程和网络编程</li>
+<li>编译和解释并存<ul>
+<li><strong>编译器</strong>是把源程序的每一条语句都编译成机器语言,并保存成二进制文件,这样运行时计算机可以直接以机器语言来运行此程序,速度很快; </li>
+<li>而<strong>解释器</strong>则是只在执行程序时,才一条一条的解释成机器语言给计算机来执行,所以运行速度是不如编译后的程序运行的快的. </li>
+<li>Java 比较特殊是先编译成字节码（.class）文件并不是其他语言编译后的二进制文件，然后在 jvm 上解释执行字节码。</li>
+</ul>
+</li>
+</ul>
+<p><img alt="image-20191205000632350" data-src="https://cdn.kaiming66.com/image-20191204232024421.png" class="lazyload"></p>
+<ul>
+<li>.class 字节码 –&gt; 机器码，jvm 逐行解释会比较慢，所以引入了 JIT 编译器，JIT 完成一次编译后会将字节码对应的机器码保留下来，jvm 会根据每次执行的情况收集信息进行优化，所以越执行越快。</li>
+<li>jvm 是实现 “一次编译，到处运行”的关键</li>
+</ul>
+<h2 id="jdk、jre、jvm-的关系"><a href="#jdk、jre、jvm-的关系" class="headerlink" title="jdk、jre、jvm 的关系"></a>jdk、jre、jvm 的关系</h2><ul>
+<li>jdk 包括：<ul>
+<li>javac（编译器）</li>
+<li>javadoc（生成java文档）</li>
+<li>jdb（命令行下debug）</li>
+<li>jre 包括：<ul>
+<li>jvm</li>
+<li>java类库</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>javadoc 图例：</li>
+</ul>
+<p><img alt="image-20191205001016598" data-src="https://cdn.kaiming66.com/image-20191205001016598.png" class="lazyload"></p>
+<p><img alt="image-20191205001020328" data-src="https://cdn.kaiming66.com/image-20191205001020328.png" class="lazyload"></p>
+<ul>
+<li>如果你只想运行 java 程序的话 jre 就够了，但是基本上还是得需要 jdk</li>
+<li>HotSpot VM 是 Oracle JDK 和 Open JDK 共同的虚拟机，即 jvm </li>
+<li>Oracle JDK 基于 Open JDK，但是更稳定，性能更好</li>
+</ul>
+<h2 id="Java-与-c-的区别于联系"><a href="#Java-与-c-的区别于联系" class="headerlink" title="Java 与 c++ 的区别于联系"></a>Java 与 c++ 的区别于联系</h2><ul>
+<li>都是面向对象，封装、继承、多态</li>
+<li>Java 不提供指针访问内存，内存更安全</li>
+<li>Java 类是单继承，c++可以多继承</li>
+<li>Java 有内存自动管理机制，无需手动释放内存</li>
+</ul>
+<h2 id="字符型常量和字符串常量的区别"><a href="#字符型常量和字符串常量的区别" class="headerlink" title="字符型常量和字符串常量的区别"></a>字符型常量和字符串常量的区别</h2><ul>
+<li>形式上：<ul>
+<li>char ：单引号引起来的一个字符</li>
+<li>string：双引号引起的多个字符</li>
+</ul>
+</li>
+<li>含义：<ul>
+<li>char：字符型常量相当于一个整型值（ASCII值）</li>
+<li>string：代表一个地址值（即该字符串在内存中的位置）</li>
+</ul>
+</li>
+<li>占内存大小：<ul>
+<li>char：2字节</li>
+<li>string：最少一字符（结束标志）</li>
+</ul>
+</li>
+</ul>
+<p><img alt="image-20191205001256271" data-src="https://cdn.kaiming66.com/image-20191205001256271.png" class="lazyload"></p>
+<h2 id="构造器-Constructor-不能被-override"><a href="#构造器-Constructor-不能被-override" class="headerlink" title="构造器 Constructor 不能被 override"></a><strong>构造器 Constructor 不能被 override</strong></h2><h2 id="重载和重写"><a href="#重载和重写" class="headerlink" title="重载和重写"></a>重载和重写</h2><ul>
+<li>重载： 发生在同一个类中，方法名必须相同，参数类型不同、个数不同、顺序不同，方法返回值和访问修饰符可以不同。</li>
+<li>重写： 父类方法访问修饰符为 private 则子类就不能重写该方法。<strong>也就是说方法提供的行为改变，而方法的外貌并没有改变。</strong></li>
+</ul>
+<h2 id="Java-面向对象三大特性：封装、继承、多态"><a href="#Java-面向对象三大特性：封装、继承、多态" class="headerlink" title="Java 面向对象三大特性：封装、继承、多态"></a>Java 面向对象三大特性：封装、继承、多态</h2><h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><ul>
+<li>继承： <strong>继承是使用已存在的类的定义作为基础建立新类的技术，</strong> <strong>通过使用继承我们能够非常方便地复用以前的代码</strong>。子类用父类的功能或者自己增加新的功能，<strong>但不能选择性的继承。</strong><ul>
+<li><strong>1.</strong>子类拥有父类的所有方法和属性<strong>（包括私有属性和方法）</strong>，但是无法访问，只是拥有</li>
+<li>2.子类可以有自己的属性和方法，即可以对父类扩展</li>
+<li>3.子类可以用自己的方式实现父类的方法（重写）</li>
+<li>解释：<ul>
+<li>子类继承父类，子类拥有父类所有的属性和方法，但是父类的私有属性和私有方法，子类是不能访问的，当然一些父类的<strong>私有属性可能可以通过相应的方法访问到，但是私有的方法似乎不能简单的访问</strong>，这里暂不考虑Java反射机制。<strong>在一个子类被创建的时候，首先会在内存中创建一个父类对象，然后在父类对象外部放上子类独有的属性，两者合起来形成一个子类的对象。</strong>子类对象确实拥有父类对象中所有的属性和方法，但是父类对象中的私有属性和方法，子类是无法访问到的，只是拥有，但不能使用。所以子类对象是绝对大于父类对象的，所谓的子类对象只能继承父类非私有的属性及方法的说法是错误的，可以继承，只是无法访问到而已</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h3><ul>
+<li>封装：把这个对象的属性私有化，然后对外提供可以被外界访问属性的方法。</li>
+</ul>
+<h3 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h3><ul>
+<li><strong>多态</strong>： 所谓多态就是指程序中定义的引用变量所指向的具体类型和通过该引用变量发出的方法调用在编程时并不确定，而是在程序运行期间才确定，即一个引用变量到底会指向哪个类的实例对象，该引用变量发出的方法调用到底是哪个类中实现的方法，必须在由程序运行期间才能决定。<br>就是在编程期间，并不知道这个引用变量指向的具体类型是什么，或者是方法该调用哪个，只有在程序运行期间才能确定。多态的两种实现方式：<ul>
+<li>继承（多个子类对一个方法的重写）</li>
+<li>实现接口（实现接口并覆盖同一方法）</li>
+</ul>
+</li>
+</ul>
+<h2 id="String、StringBuffer、StringBuilder-的区别？为什么String-是不可变的？"><a href="#String、StringBuffer、StringBuilder-的区别？为什么String-是不可变的？" class="headerlink" title="String、StringBuffer、StringBuilder 的区别？为什么String 是不可变的？"></a>String、StringBuffer、StringBuilder 的区别？为什么String 是不可变的？</h2><ul>
+<li>String 源码中，用 <strong>private final char value[]</strong> 保存字符，因为 final 所以是不可变的</li>
+<li>StringBuffer 和 StringBuilder 都是继承 AbstractStringBuilder 类，而在这个类中 <strong>char value[]</strong> 保存字符，所以这两个可以改变</li>
+<li>StringBuffer 和 StringBuilder 都是调用者 AbstractStringBuilder 的构造函数：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractStringBuilder</span> <span class="keyword">implements</span> <span class="title">Appendable</span>, <span class="title">CharSequence</span> </span>&#123; </span><br><span class="line">        <span class="keyword">char</span>[] value; </span><br><span class="line">        <span class="keyword">int</span> count; </span><br><span class="line">        AbstractStringBuilder() &#123; </span><br><span class="line">        &#125; </span><br><span class="line">        AbstractStringBuilder(<span class="keyword">int</span> capacity) &#123;</span><br><span class="line">            value = <span class="keyword">new</span> <span class="keyword">char</span>[capacity]; </span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>线程安全性：<ul>
+<li>String 中的对象是不可变的，可以理解为常量，所以线程安全</li>
+<li>AbstractStringBuilder 是这俩的公共父类，定义了一些对字符串操作的方法<ul>
+<li>StringBuffer 对方法加了同步锁，所以线程安全</li>
+<li>StringBuilder 并没有加锁，所以非线程安全</li>
+</ul>
+</li>
+<li>性能：<ul>
+<li>String 每次改变时都会生成一个新的对象，然后指针指向这个新的对象</li>
+<li>StringBuffer 、StringBuilder 都是对自己本身操作，不会产生新的对象来改变对象引用，StringBuilder 性能要比 StringBuffer 高 10%~15%，但是要冒着线程不安全的风险。</li>
+<li>StringBuilder &gt; StringBuffer &gt; String（性能）</li>
+</ul>
+</li>
+<li>总结：<ul>
+<li>操作少量数据：String</li>
+<li>单线程下大量数据：StringBuilder</li>
+<li>多线程下大量数据：StringBuffer</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="自动装箱、拆箱"><a href="#自动装箱、拆箱" class="headerlink" title="自动装箱、拆箱"></a>自动装箱、拆箱</h2><ul>
+<li><p><strong>装箱</strong>：将基本类型用它们对应的引用类型包装起来</p>
+</li>
+<li><p><strong>拆箱：</strong>将包装类型转换为基本数据类型</p>
+</li>
+</ul>
+<h2 id="在一个静态方法内调用一个非静态成员为什么是非法的？"><a href="#在一个静态方法内调用一个非静态成员为什么是非法的？" class="headerlink" title="在一个静态方法内调用一个非静态成员为什么是非法的？"></a>在一个静态方法内调用一个非静态成员为什么是非法的？</h2><ul>
+<li>静态方法属于类的本身，在类加载的时候就会分配内存，而非静态成员只有在类实例化时才会分配内存，静态方法不通过对象来调用，所以静态方法里，不能调用非静态成员</li>
+</ul>
+<h2 id="在-java-中定义一个不做事且没有参数的构造方法的作用："><a href="#在-java-中定义一个不做事且没有参数的构造方法的作用：" class="headerlink" title="在 java 中定义一个不做事且没有参数的构造方法的作用："></a>在 java 中定义一个不做事且没有参数的构造方法的作用：</h2><ul>
+<li>java 程序在执行子类构造方法之前会执行父类的构造方法，每个构造方法都隐含着 super() ，如果父类只定义了有参的构造函数没有提供 无参的构造方法，则会报错</li>
+</ul>
+<h2 id="import-java和javax有什么区别？"><a href="#import-java和javax有什么区别？" class="headerlink" title="import java和javax有什么区别？"></a>import java和javax有什么区别？</h2><ul>
+<li>以前 javax 是 java 包 的扩展，随着时间推移 javax 也成为 java api 的一部分，所以这俩现在没啥区别</li>
+</ul>
+<h2 id="接口和抽象类的区别？"><a href="#接口和抽象类的区别？" class="headerlink" title="接口和抽象类的区别？"></a>接口和抽象类的区别？</h2><ul>
+<li>接口方法默认是 public ，java 8 开始接口方法可以有默认实现（default static），而抽象类也可以包含非抽象的方法</li>
+<li>接口中的变量一定是 static final 的，抽象类中随意</li>
+<li>抽象方法就是为了重写所以别定义成 private，剩下的随意</li>
+<li>设计层面来看：<ul>
+<li>抽象就是类的一种抽象，类似一个模板</li>
+<li>而接口时类的行为的规范</li>
+</ul>
+</li>
+</ul>
+<h2 id="成员变量与局部变量的区别？"><a href="#成员变量与局部变量的区别？" class="headerlink" title="成员变量与局部变量的区别？"></a>成员变量与局部变量的区别？</h2><h3 id="语法上看"><a href="#语法上看" class="headerlink" title="语法上看"></a>语法上看</h3><ul>
+<li>成员变量属于类，可以用访问控制符及 static 修饰</li>
+<li>局部变量属于方法，不可以被上面这些修饰，但是两者都可以被 final 修饰</li>
+</ul>
+<h3 id="在内存的存储方式"><a href="#在内存的存储方式" class="headerlink" title="在内存的存储方式"></a>在内存的存储方式</h3><ul>
+<li>成员变量 static 修饰，是属于类的</li>
+<li>没有被 static 修饰，是属于实例对象的</li>
+<li>对象存在 <strong>堆内存</strong>，局部变量存在 <strong>栈内存</strong></li>
+</ul>
+<h3 id="内存生命周期"><a href="#内存生命周期" class="headerlink" title="内存生命周期"></a>内存生命周期</h3><ul>
+<li>成员变量随对象的创建而存在，是对象的一部分</li>
+<li>局部变量随方法的调用而自动消失</li>
+</ul>
+<h3 id="初值"><a href="#初值" class="headerlink" title="初值"></a>初值</h3><ul>
+<li>成员变量会自动赋初值（final除外）</li>
+<li>局部变量不会</li>
+</ul>
+<h2 id="对象实体和对象引用的不同？"><a href="#对象实体和对象引用的不同？" class="headerlink" title="对象实体和对象引用的不同？"></a>对象实体和对象引用的不同？</h2><ul>
+<li>new 创建对象实体，对象实体存在 <strong>堆内存</strong> 中</li>
+<li>对象引用指向对象实体，存在 <strong>栈内存</strong> 中</li>
+<li>对象引用可以指向 0 ~ 1 个</li>
+<li>对象实体对象实体可以被 n 个对象引用</li>
+</ul>
+<h2 id="静态方法-和-实例方法-有何不同？"><a href="#静态方法-和-实例方法-有何不同？" class="headerlink" title="静态方法 和 实例方法 有何不同？"></a>静态方法 和 实例方法 有何不同？</h2><ul>
+<li>静态方法属于类，不需要创建对象，里面只能访问静态成员变量，不能访问非静态的成员和方法</li>
+</ul>
+<h2 id="对象的相等-与-指向他们的引用相等-有何区别？"><a href="#对象的相等-与-指向他们的引用相等-有何区别？" class="headerlink" title="对象的相等 与 指向他们的引用相等 有何区别？"></a>对象的相等 与 指向他们的引用相等 有何区别？</h2><ul>
+<li>对象相等：比较的是内存中存放的内容是否相等</li>
+<li>对象引用的相等：比较的是指向的内存地址是否相等</li>
+</ul>
+<h2 id="与-equals-！！"><a href="#与-equals-！！" class="headerlink" title="== 与 equals ！！"></a><strong>== 与 equals ！！</strong></h2><h3 id><a href="#" class="headerlink" title="=="></a>==</h3><ul>
+<li>比较的是内存地址，即两个对象是否一样，基本类型比较值，引用类型比较对象</li>
+</ul>
+<h3 id="equals"><a href="#equals" class="headerlink" title="equals"></a>equals</h3><p>其实就是提供一个能够供类重写的一个方法：</p>
+<ul>
+<li>没有重写的话与“==”一样比较内存地址</li>
+<li>重写的话，比如 String 重写了 equals 比较的是内容是否一样，有自己的比较规则</li>
+</ul>
+<p><img alt="image-20191205002956559" data-src="https://cdn.kaiming66.com/image-20191205002956559.png" class="lazyload"></p>
+<h2 id="hashCode-和-equals"><a href="#hashCode-和-equals" class="headerlink" title="hashCode 和 equals"></a>hashCode 和 equals</h2><h3 id="hashCode"><a href="#hashCode" class="headerlink" title="hashCode()"></a>hashCode()</h3><ul>
+<li>作用是获取 哈希码（散列码），确定该对象在哈希表中的位置，hashCode() 在 Object.java 类中</li>
+<li>以 hashSet 如何检查重复来说：<ul>
+<li>首先 通过 对象的 hashCode 来计算对象加入的位置，同时向其他对象的 hashCode 比较</li>
+<li>如果没有则不重复，如果有 则调取对象的 equals 方法，再次判断内容是否相同</li>
+<li>如果真相同，那么 hashSet 不会让他加入</li>
+<li>这样的好处是减少了 equals 的使用次数，提高了运行速度</li>
+<li>hashMap 与这类似 不过它 不允许 <strong>键</strong> 重复，hashSet 不允许 <strong>值</strong> 重复</li>
+</ul>
+</li>
+<li><strong>hashCode</strong> 就是获取散列码，<strong>所以只在散列表中有用，在其他情况下没用</strong></li>
+</ul>
+<h3 id="hashCode-和-equals-的规定"><a href="#hashCode-和-equals-的规定" class="headerlink" title="hashCode 和 equals 的规定"></a>hashCode 和 equals 的规定</h3><ul>
+<li>如果两个对象相同，则 hashCode 一定相同</li>
+<li>两个对象的 hashCode 一样，也不一定相等（因为如果重写了 hashCode 的话，根据算法可能出现重复现象）</li>
+<li>如果重写了 equals 方法那就必须得重写 hashCode 使得，equals返回 true 时，hashCode 必须返回 true</li>
+<li>如果没重写过 hashCode 则不同对象的值永远不一样</li>
+</ul>
+<h2 id="Java只有值传递！！"><a href="#Java只有值传递！！" class="headerlink" title="Java只有值传递！！"></a>Java只有值传递！！</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">传递对象的引用不会改变，但是对象的属性可以改变。</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    List&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">    list.add(<span class="string">"1"</span>);</span><br><span class="line">    list.add(<span class="string">"2"</span>);</span><br><span class="line">    System.out.println(list); <span class="comment">//1，2</span></span><br><span class="line">    change1(list);</span><br><span class="line">    System.out.println(list);<span class="comment">//1，2</span></span><br><span class="line">    change2(list);</span><br><span class="line">    System.out.println(list);<span class="comment">//1，2，3</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">change1</span><span class="params">(List&lt;String&gt; list)</span></span>&#123;</span><br><span class="line">    list = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">change2</span><span class="params">(List&lt;String&gt; list)</span></span>&#123;</span><br><span class="line">    list.add(<span class="string">"3"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>解释：<ul>
+<li>如果是引用传递，那么 change1 的时候，会把 list 对象传进来，然后 new ArrayList<string>() 的时候，就会赋予 list 一个新的指向的地址，那么应该输出的是什么都没有，因为指向了新的内存空间。</string></li>
+<li>而正因为是值传递，值传递就是复制自己一份传给形参，对象的话就会复制自己的内存地址给了 list 形参，然后这个 list 在 指向 new 之后，是不会影响到原本的 list 的，所以这里还是输出了 1,2</li>
+<li>change2 就很好的说明了这点，因为传递的内存地址，所以 list.add 也确实加到了 实参 list 上面，所以输出 1,2,3</li>
+</ul>
+</li>
+</ul>
+<p><img alt="Image" data-src="https://cdn.kaiming66.com/image-20191204232024420.png" class="lazyload"></p>
+<ul>
+<li>上面这幅图如何解释？<ul>
+<li>既然是传内存地址为何没变</li>
+<li>因为大家都忽略了，String = “hollischuang” 时，如果常量池里没有的话，就相当于 new String(“ hollischuang”)</li>
+<li>所以也是指向新的内存地址，原本的不会改变</li>
+</ul>
+</li>
+</ul>
+<h2 id="线程、程序、进程的基本概念，三者关系是什么？"><a href="#线程、程序、进程的基本概念，三者关系是什么？" class="headerlink" title="线程、程序、进程的基本概念，三者关系是什么？"></a>线程、程序、进程的基本概念，三者关系是什么？</h2><h3 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h3><p><strong>线程</strong>与进程相似，但线程是一个比进程更小的执行单位。一个进程在其执行的过程中可以产生多个线程。<strong>与进程不同的是同类的多个线程共享同一块内存空间和一组系统资源</strong>，所以系统在产生一个线程，或是<strong>在各个线程之间作切换工作时，负担要比进程小得多</strong>，也正因为如此，线程也被称为轻量级进程。</p>
+<h3 id="程序"><a href="#程序" class="headerlink" title="程序"></a>程序</h3><p><strong>程序</strong>是含有指令和数据的文件，被存储在磁盘或其他的数据存储设备中，也就是说程序是静态的代码。</p>
+<h3 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h3><p><strong>进程</strong>就是程序的一次执行过程，<strong>是系统运行程序的基本单位</strong>， 因此进程是动态的。系统运行一个程序即是一个进程从创建，运行到消亡的过程。简单来说，一个进程就是一个执行中的程序，它在计算机中一个指令接着一个指令地执行着，同时，每个进程还占有某些系统资源如CPU时间，内存空间，文件，输入输出设备的使用权等等。换句话说，当程序在执行时，将会被操作系统载入内存中。 线程是进程划分成的更小的运行单位。线程和进程最大的不同在于基本上各进程是独立的，而各线程则不一定，因为同一进程中的线程极有可能会相互影响。<strong>从另一角度来说，进程属于操作系统的范畴，主要是同一段时间内，可以同时执行一个以上的程序，而线程则是在同一程序内几乎同时执行一个以上的程序段。</strong></p>
+<h3 id="线程的基本状态"><a href="#线程的基本状态" class="headerlink" title="线程的基本状态"></a>线程的基本状态</h3><p><img alt="image-20191205110900503" data-src="https://cdn.kaiming66.com/image-20191205110900503.png" class="lazyload"></p>
+<ul>
+<li>线程在生命周期中并不是固定处于某一个状态而是随着代码的执行在不同状态之间切换。Java 线程状态变迁如下：</li>
+</ul>
+<p><img alt="image-20191205110918737" data-src="https://cdn.kaiming66.com/image-20191205110918737.png" class="lazyload"></p>
+<ul>
+<li>线程创建之后它将处于 <strong>NEW（新建）</strong> 状态，调用 start() 方法后开始运行，线程这时候处于 <strong>READY（可运行）</strong> 状态。可运行状态的线程获得了 cpu 时间片（timeslice）后就处于 <strong>RUNNING（运行）</strong> 状态。</li>
+<li><strong>操作系统隐藏 Java虚拟机（JVM）中的 READY 和 RUNNING 状态，它只能看到 RUNNABLE 状态**</strong>，所以 Java 系统一般将这两个状态统称为** <strong>RUNNABLE（运行中）</strong> <strong>状态 。</strong></li>
+<li>当线程执行 wait()方法之后，线程进入 <strong>WAITING（等待）</strong>状态。进入等待状态的线程需要依靠其他线程的通知才能够返回到运行状态，而 <strong>TIME_WAITING(超时等待)</strong> 状态相当于在等待状态的基础上增加了超时限制，比如通过 sleep（long millis）方法或 wait（long millis）方法可以将 Java 线程置于 TIMED WAITING 状态。当超时时间到达后 Java 线程将会返回到 RUNNABLE 状态。当线程调用同步方法时，在没有获取到锁的情况下，线程将会进入到 <strong>BLOCKED（阻塞）</strong> 状态。线程在执行 Runnable 的run()方法之后将会进入到 <strong>TERMINATED（终止）</strong> 状态。</li>
+</ul>
+<h2 id="final-关键字总结"><a href="#final-关键字总结" class="headerlink" title="final 关键字总结"></a>final 关键字总结</h2><ul>
+<li>用在三个地方：变量、方法、类</li>
+</ul>
+<h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><ul>
+<li>基本类型：则其数值初始化后不能改变</li>
+<li>引用类型：初始化后不能指向其他对象</li>
+</ul>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><ul>
+<li>以前版本的原因：<ul>
+<li>1.防止这个方法被继承</li>
+<li>2.提高效率，final 方法会转为内嵌调用，但是如果方法过于庞大，就几乎没有性能提升</li>
+<li>3.现在Java版本不需要这样优化了，private 定义的方法默认为 final，final定义属性的话没啥用，因为属性就不能被更改了</li>
+</ul>
+</li>
+</ul>
+<h3 id="类"><a href="#类" class="headerlink" title="类"></a>类</h3><ul>
+<li>即这个类不能被继承，里面所有方法默认为 final</li>
+</ul>
+<h2 id="Java的异常处理"><a href="#Java的异常处理" class="headerlink" title="Java的异常处理"></a>Java的异常处理</h2><p><img alt="image-20191205112046781" data-src="https://cdn.kaiming66.com/image-20191205112046781.png" class="lazyload"></p>
+<ul>
+<li>在 Java 中，所有的异常都有一个共同的祖先java.lang包中的 <strong>Throwable类</strong>。Throwable： 有两个重要的子类：<strong>Exception（异常）</strong> 和 <strong>Error（错误）</strong> ，二者都是 Java 异常处理的重要子类，各自都包含大量子类。</li>
+<li><strong>Error（错误）:是程序无法处理的错误</strong>，表示运行应用程序中较严重问题。大多数错误与代码编写者执行的操作无关，而表示代码运行时 JVM（Java 虚拟机）出现的问题。例如，Java虚拟机运行错误（Virtual MachineError），当 JVM 不再有继续执行操作所需的内存资源时，将出现 OutOfMemoryError。这些异常发生时，Java虚拟机（JVM）一般会选择线程终止。</li>
+<li><strong>Exception（异常）:是程序本身可以处理的异常</strong>。Exception 类有一个重要的子类 <strong>RuntimeException</strong>。RuntimeException 异常由Java虚拟机抛出。<strong>NullPointerException</strong>（要访问的变量没有引用任何对象时，抛出该异常）、<strong>ArithmeticException</strong>（算术运算异常，一个整数除以0时，抛出该异常）和 <strong>ArrayIndexOutOfBoundsException</strong> （下标越界异常）。</li>
+<li><strong>异常和错误的区别：异常能被程序本身处理，错误是无法处理。</strong></li>
+</ul>
+<h3 id="Throwable-常用方法"><a href="#Throwable-常用方法" class="headerlink" title="Throwable 常用方法"></a>Throwable 常用方法</h3><ul>
+<li>public string getMessage():返回异常发生时的简要描述</li>
+<li>public string toString():返回异常发生时的详细信息</li>
+<li>public string getLocalizedMessage():返回异常对象的本地化信息。使用Throwable的子类覆盖这个方法，可以生成本地化信息。如果子类没有覆盖该方法，则该方法返回的信息与getMessage（）返回的结果相同</li>
+<li>public void printStackTrace():在控制台上打印Throwable对象封装的异常信息</li>
+</ul>
+<h3 id="final-会覆盖-try-的-return-语句"><a href="#final-会覆盖-try-的-return-语句" class="headerlink" title="final 会覆盖 try 的 return 语句"></a>final 会覆盖 try 的 return 语句</h3><p><img alt="image-20191205112238180" data-src="https://cdn.kaiming66.com/image-20191205112238180.png" class="lazyload"></p>
+<h2 id="Java-如果有些字段不想序列化怎么办？"><a href="#Java-如果有些字段不想序列化怎么办？" class="headerlink" title="Java 如果有些字段不想序列化怎么办？"></a>Java 如果有些字段不想序列化怎么办？</h2><ul>
+<li>transient 字段来修饰变量，不能修饰类和方法</li>
+<li>ArrayList 就用到了 transient 来只序列化有效元素，来提高效率</li>
+<li>ArrayList 源码：</li>
+</ul>
+<p><img alt="image-20191205112314651" data-src="https://cdn.kaiming66.com/image-20191205112314651.png" class="lazyload"></p>
+<p><img alt="image-20191205112322555" data-src="https://cdn.kaiming66.com/image-20191205112322555.png" class="lazyload"></p>
+<ul>
+<li>这里只把有效的元素序列化，提高效率</li>
+</ul>
+<h2 id="获取键盘输入的两种方法："><a href="#获取键盘输入的两种方法：" class="headerlink" title="获取键盘输入的两种方法："></a>获取键盘输入的两种方法：</h2><ul>
+<li>Scanner</li>
+</ul>
+<p><img alt="image-20191205112410713" data-src="https://cdn.kaiming66.com/image-20191205112410713.png" class="lazyload"></p>
+<ul>
+<li>BufferedReader</li>
+</ul>
+<p><img alt="image-20191205112418895" data-src="https://cdn.kaiming66.com/image-20191205112418895.png" class="lazyload"></p>
+<h2 id="Java-I-O-总结"><a href="#Java-I-O-总结" class="headerlink" title="Java I/O 总结"></a>Java I/O 总结</h2><ul>
+<li>按照流向：输入流、输出流</li>
+<li>按照操作单元：字节流、字符流</li>
+<li>按照流的角色：节点流、处理流</li>
+<li>Java IO 40 多个类，全部诞生于这 4 个类：<ul>
+<li>InputStream/Reader: 所有的输入流的基类，前者是字节输入流，后者是字符输入流。</li>
+<li>OutputStream/Writer: 所有输出流的基类，前者是字节输出流，后者是字符输出流。</li>
+</ul>
+</li>
+</ul>
+<p><img alt="image-20191205112514137" data-src="https://cdn.kaiming66.com/image-20191205112514137.png" class="lazyload"></p>
+<ul>
+<li>自己总结一下，带 Stream 的都是字节流，不带的 都是字符流</li>
+</ul>
+<p><img alt="image-20191205112526100" data-src="https://cdn.kaiming66.com/image-20191205112526100.png" class="lazyload"></p>
+<h3 id="不同的读取方式的速度：批处理带缓冲-gt-批处理-gt-缓冲-gt-直接读取"><a href="#不同的读取方式的速度：批处理带缓冲-gt-批处理-gt-缓冲-gt-直接读取" class="headerlink" title="不同的读取方式的速度：批处理带缓冲&gt;批处理&gt;缓冲&gt;直接读取"></a>不同的读取方式的速度：批处理带缓冲&gt;批处理&gt;缓冲&gt;直接读取</h3><h3 id="既然有了字节流为什么还有字符流？（主要是应对编码问题）"><a href="#既然有了字节流为什么还有字符流？（主要是应对编码问题）" class="headerlink" title="既然有了字节流为什么还有字符流？（主要是应对编码问题）"></a>既然有了字节流为什么还有字符流？（主要是<strong>应对编码问题</strong>）</h3><ul>
+<li>字符流是由 Java 虚拟机将字节转换得到的，问题就出在这个过程还算是非常耗时，并且，如果我们<strong>不知道编码类型就很容易出现乱码问题</strong>。所以， I/O 流就干脆提供了一个直接操作字符的接口，方便我们平时对字符进行流操作。如果音频文件、图片等媒体文件用字节流比较好，如果涉及到字符的话使用字符流比较好。</li>
+</ul>
+<h3 id="BIO、NIO、AIO的区别？"><a href="#BIO、NIO、AIO的区别？" class="headerlink" title="BIO、NIO、AIO的区别？"></a>BIO、NIO、AIO的区别？</h3><h4 id="BIO"><a href="#BIO" class="headerlink" title="BIO"></a>BIO</h4><p><strong>BIO (Blocking I/O):</strong> 同步阻塞I/O模式，数据的读取写入必须阻塞在一个线程内等待其完成。在活动连接数不是特别高（小于单机1000）的情况下，这种模型是比较不错的，可以让每一个连接专注于自己的 I/O 并且编程模型简单，也不用过多考虑系统的过载、限流等问题。线程池本身就是一个天然的漏斗，可以缓冲一些系统处理不了的连接或请求。但是，当面对十万甚至百万级连接的时候，传统的 BIO 模型是无能为力的。因此，我们需要一种更高效的 I/O 处理模型来应对更高的并发量。</p>
+<h4 id="NIO"><a href="#NIO" class="headerlink" title="NIO"></a>NIO</h4><p><strong>NIO (New I/O):</strong> NIO是一种同步非阻塞的I/O模型，在Java 1.4 中引入了NIO框架，对应 java.nio 包，提供了 Channel , Selector，Buffer等抽象。NIO中的N可以理解为Non-blocking，不单纯是New。它支持面向缓冲的，基于通道的I/O操作方法。 NIO提供了与传统BIO模型中的 Socket 和 ServerSocket 相对应的 SocketChannel 和 ServerSocketChannel 两种不同的套接字通道实现,两种通道都支持阻塞和非阻塞两种模式。阻塞模式使用就像传统中的支持一样，比较简单，但是性能和可靠性都不好；非阻塞模式正好与之相反。对于低负载、低并发的应用程序，可以使用同步阻塞I/O来提升开发速率和更好的维护性；对于高负载、高并发的（网络）应用，应使用 NIO 的非阻塞模式来开发</p>
+<h4 id="AIO"><a href="#AIO" class="headerlink" title="AIO"></a>AIO</h4><p><strong>AIO (Asynchronous I/O):</strong> AIO 也就是 NIO 2。在 Java 7 中引入了 NIO 的改进版 NIO 2,它是异步非阻塞的IO模型。异步 IO 是基于事件和回调机制实现的，也就是应用操作之后会直接返回，不会堵塞在那里，当后台处理完成，操作系统会通知相应的线程进行后续的操作。AIO 是异步IO的缩写，虽然 NIO 在网络操作中，提供了非阻塞的方法，但是 NIO 的 IO 行为还是同步的。对于 NIO 来说，我们的业务线程是在 IO 操作准备好时，得到通知，接着就由这个线程自行进行 IO 操作，IO操作本身是同步的。查阅网上相关资料，我发现就目前来说 AIO 的应用还不是很广泛，Netty 之前也尝试使用过 AIO，不过又放弃了。</p>
+<h2 id="深拷贝和浅拷贝："><a href="#深拷贝和浅拷贝：" class="headerlink" title="深拷贝和浅拷贝："></a>深拷贝和浅拷贝：</h2><h3 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h3><p>对基本数据类型进行值传递，对引用数据类型，创建一个新的对象，并复制其内容，此为深拷贝。</p>
+<h3 id="浅拷贝"><a href="#浅拷贝" class="headerlink" title="浅拷贝"></a>浅拷贝</h3><p>对基本数据类型进行值传递，对引用数据类型进行引用传递般的拷贝，此为浅拷贝。</p>
+<h2 id="-1"><a href="#-1" class="headerlink" title></a><img alt="image-20191205113008514" data-src="https://cdn.kaiming66.com/image-20191205113008514.png" class="lazyload"></h2></div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Archiver</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.kaiming66.com/2019/12/05/Java/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/">https://www.kaiming66.com/2019/12/05/Java/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.kaiming66.com">Archiver`s Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/java/">java    </a><a class="post-meta__tags" href="/tags/%E9%9D%A2%E8%AF%95/">面试    </a></div><div class="post_share"><div class="social-share" data-image="https://cdn.kaiming66.com/java.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script></div></div><div class="post-reward"><a class="reward-button"><i class="fa fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><img class="lazyload post-qr-code__img" src="/img/wechat.jpg"><div class="post-qr-code__desc">微信</div></li><li class="reward-item"><img class="lazyload post-qr-code__img" src="/img/alipay.jpg"><div class="post-qr-code__desc">支付寶</div></li></ul></div></a></div><nav class="pagination_post" id="pagination"><div class="prev-post pull_left"><a href="/2019/12/06/jvm/Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E6%80%BB%E7%BB%93/"><img class="prev_cover lazyload" data-src="https://cdn.kaiming66.com/jvm%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="label">上一篇</div><div class="prev_info"><span>深入理解JVM--内存区域总结</span></div></a></div><div class="next-post pull_right"><a href="/2019/12/02/project/Java-Web-%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E5%8D%9A%E5%AE%A2/"><img class="next_cover lazyload" data-src="https://cdn.kaiming66.com/blogmanager.png" onerror="onerror=null;src='/img/404.jpg'"><div class="label">下一篇</div><div class="next_info"><span>基于 Servlet + jsp + MySQL 实现博客管理系统</span></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fa fa-fw fa-thumbs-up" aria-hidden="true"></i><span> 相关推荐</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/2020/05/12/ElasticSearch/ElasticSearch入门/" title="ElasticSearch--简单入门"><img class="relatedPosts_cover lazyload"data-src="https://cdn.kaiming66.com/es-timg.jpg"><div class="relatedPosts_title">ElasticSearch--简单入门</div></a></div><div class="relatedPosts_item"><a href="/2020/02/27/Java/Java--对象的初始化流程/" title="Java--对象的初始化流程"><img class="relatedPosts_cover lazyload"data-src="https://cdn.kaiming66.com/Java-7aaabf9a278e7147c928bfad79c64b8d5628447c.jpg"><div class="relatedPosts_title">Java--对象的初始化流程</div></a></div><div class="relatedPosts_item"><a href="/2020/03/06/Distributed/分布式--记一次搭建RPC框架/" title="分布式--记一次搭建RPC框架"><img class="relatedPosts_cover lazyload"data-src="https://cdn.kaiming66.com/%E5%88%86%E5%B8%83%E5%BC%8F-daa47867abce2104af17ea7d1df576ad83d59d40.jpg"><div class="relatedPosts_title">分布式--记一次搭建RPC框架</div></a></div><div class="relatedPosts_item"><a href="/2020/05/14/JDK8源码/JDK8源码--String.trim()/" title="JDK8源码--String.trim()"><img class="relatedPosts_cover lazyload"data-src="https://cdn.kaiming66.com/JDK8%E6%BA%90%E7%A0%81-photo-1554310603-d39d43033735.jfif"><div class="relatedPosts_title">JDK8源码--String.trim()</div></a></div><div class="relatedPosts_item"><a href="/2020/02/23/Java/Java--深入理解SPI机制/" title="Java--深入理解SPI机制"><img class="relatedPosts_cover lazyload"data-src="https://cdn.kaiming66.com/Java-7e11eb21c25ae0ccd7234e9ae83d60c2398b6e1c.jpg"><div class="relatedPosts_title">Java--深入理解SPI机制</div></a></div><div class="relatedPosts_item"><a href="/2020/01/26/Java/多线程--启动一个最简单的程序，有多少个线程被创建/" title="多线程--启动一个最简单的程序，有多少个线程被创建"><img class="relatedPosts_cover lazyload"data-src="https://cdn.kaiming66.com/%E5%A4%9A%E7%BA%BF%E7%A8%8B-e201e57253674f17add823dfbddc89037d3531e4.jpg"><div class="relatedPosts_title">多线程--启动一个最简单的程序，有多少个线程被创建</div></a></div></div><div class="clear_both"></div></div><hr><div id="post-comment"><div class="comment_headling"><i class="fa fa-comments fa-fw" aria-hidden="true"></i><span> 评论</span></div><div class="vcomment" id="vcomment"></div><script src="https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script><script>var notify = true == true ? true : false;
+var verify = false == true ? true : false;
+var GUEST_INFO = ['nick','mail','link'];
+var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+  return GUEST_INFO.indexOf(item) > -1
+});
+guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+
+window.valine = new Valine({
+  el:'#vcomment',
+  notify:notify,
+  verify:verify,
+  appId:'w4VPH4rpLa5PRRQHw5m35cCm-gzGzoHsz',
+  appKey:'05UsBDf0WzJBL08DtrUmqg8w',
+  placeholder:'请留下你的足迹！',
+  avatar:'monsterid',
+  guest_info:guest_info,
+  pageSize:'10',
+  lang:'zh-cn',
+  recordIP: true
+});</script></div></div></div><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2024 By Archiver</div><div class="framework-info"><span>驱动 </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" rel="noopener"><span>Butterfly</span></a></div><div class="footer_custom_text">今天又是充满期望的一天！</div><div class="icp"><a href="https://beian.miit.gov.cn" target="_blank" rel="noopener"><img class="icp-icon" src="/img/icp.png"><span>冀ICP备19023375号-1</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="阅读模式"></i><i class="fa fa-plus" id="font_plus" title="放大字体"></i><i class="fa fa-minus" id="font_minus" title="缩小字体"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="简繁转换" target="_self">繁</a><i class="darkmode fa fa-moon-o" id="darkmode" title="夜间模式"></i></div><div id="rightside-config-show"><div id="rightside_config" title="设置"><i class="fa fa-cog" aria-hidden="true"></i></div><a id="to_comment" href="#post-comment" title="直达评论"><i class="scroll_to_comment fa fa-comments">  </i></a><i class="fa fa-list-ul close" id="mobile-toc-button" title="目录" aria-hidden="true"></i><i class="fa fa-arrow-up" id="go-up" title="回到顶部" aria-hidden="true"></i></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script async src="/js/search/local-search.js"></script><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="/js/third-party/fireworks.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.15/dist/snackbar.min.js"></script><script id="ribbon_piao" mobile="true" src="/js/third-party/piao.js"></script><script src="/js/third-party/activate-power-mode.js"></script><script>POWERMODE.colorful = true; // make power mode colorful
+POWERMODE.shake = true; // turn off shake
+document.body.addEventListener('input', POWERMODE);
+</script><script src="/js/tw_cn.js"></script><script>translateInitilization()
+</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@latest/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@latest/lazysizes.min.js" async=""></script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" target="_blank" rel="noopener" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>
